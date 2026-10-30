@@ -23,13 +23,13 @@ def validar_correo(correo):
 
 
 
-
-print("---> Validación de correos electrónicos <---")
-entrada_usuario = input("Ingrese un correo electrónico para validar: ")
-
-es_valido, mensaje = validar_correo(entrada_usuario)
-
-if es_valido:
-    print(f"Resultado: {mensaje}")
-else:
-    print(f"Resultado: {mensaje}")
+while True:
+    print("---> Validación de correos electrónicos <---")
+    entrada_usuario = input("Ingrese un correo electrónico para validar: ")
+    
+    es_valido, mensaje = validar_correo(entrada_usuario)
+    
+    if es_valido:
+        print(f"Resultado: {mensaje}")
+    else:
+        print(f"Resultado: {mensaje}")
