@@ -8,7 +8,8 @@ while True:   #bucle infinito
     print ("3 - buscar contacto")
     print ("4 - Salir")
     opcion = input("Seleccione una opción: ")
-    if opcion not in ["1", "2", "3", "4"]:
+    
+    if opcion not in ["1", "2", "3", "4"]:#si la opcion ingresada por el usuario no es ninguna de las opciones validas, se le indica que la opcion no es valida
         print("Opción no válida. Por favor, seleccione una opción válida.")
 
     

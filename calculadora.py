@@ -32,3 +32,6 @@ elif operacion == "/":
         resultado = num1 / num2
         print(f"Resultado: {num1} / {num2} = {resultado}")
 else: print("Operacion no valida. intente de nuevo.")
+
+
+print("\n Calculadora optimizada en la rama de desarrollo-meoras con exito")
