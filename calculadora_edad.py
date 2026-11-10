@@ -1,24 +1,36 @@
-from datetime import datetime
+from datetime import date, datetime
 
-def calcular_edad_base(año_nacimiento):
-    #obtenemos la fecha y hora actual
+def calcular_edad_exacta (fecha_nacimiento):
     hoy = datetime.now()
-    #resta simple de años
+    años = hoy.year - fecha_nacimiento.year
 
-    edad_estimada = hoy.year - año_nacimiento
-    return edad_estimada
 
+    if(hoy.month, hoy.day) < (fecha_nacimiento.month, fecha_nacimiento.day):
+        años -= 1
+        meses = ((12 - fecha_nacimiento.month) + hoy.month-1)
+    else:
+        meses = hoy.month - fecha_nacimiento.month
+
+
+    if hoy.day >= fecha_nacimiento.day:
+        dias = hoy.day - fecha_nacimiento.day
+    else:
+        dias = (30-fecha_nacimiento.day) + hoy.day
+
+    return años, meses, dias
 
 if __name__ == "__main__":
     print("--->Calculadora de Edad<---  ")
     try:
-        año = int(input("Ingresa tu año de nacimiento (YYYY): "))
-        # validacion basica de rango de año
-        hoy = datetime.now()
-        if 1900 <= año <= hoy.year:
-            edad = calcular_edad_base(año)
-            print(f"Tienes aproximadamente {edad} años.")
+        entrada = input("Ingrese su fecha de nacimiento (YYYY-MM-DD): ")
+        fecha_nacimiento = datetime.strptime(entrada, "%Y-%m-%d").date()
+        fecha_hoy =  date.today()
+
+        if fecha_nacimiento <= fecha_hoy and fecha_nacimiento.year >= 1900:
+            años, meses, dias = calcular_edad_exacta(fecha_nacimiento)
+            print(f"Su edad exacta es: {años} años, {meses} meses y {dias} días.")
         else:
-            print("Por favor, ingresa un año válido entre 1900 y el año actual.")
+            print("La fecha de nacimiento ingresada no es válida. Asegúrese de que sea una fecha pasada y posterior a 1900.")
+
     except ValueError:
-        print("Por favor, ingresa un número válido para el año.")
+        print("Formato de fecha inválido. Por favor, ingrese la fecha en el formato YYYY-MM-DD.")
