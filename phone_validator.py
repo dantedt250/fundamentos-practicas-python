@@ -1,4 +1,12 @@
 #-- validation functions (pep 8)
+
+def sanitize_phone(raw_text):
+    """removes common formatting characters like spaces,dashes and paretheses"""
+    cleaned = raw_text.replace("-","").replace(" ","").replace("(","").replace(")","")
+
+    return cleaned
+
+
 def is_valid_phone(phone_text):
     """validates that the input string contains strictly 10 digits"""
     
@@ -13,14 +21,29 @@ def is_valid_phone(phone_text):
     
     return True,"valid 10-digit phone number!"
 
+def format_phone(clean_digits):
+    """formats a 10-digit string into (xxx) xxx-xxxx"""
+    area_code = clean_digits[0:3]
+    prefix = clean_digits[3:6]
+    line_number = clean_digits[6:10]
+
+    return f"({area_code}) {prefix}- {line_number}"
+
+
 if __name__=="__main__":
-    print("---Phone number validator v1.0")
-    raw_input = input("Enter a 10-digit phone number").strip()
-    valid, message = is_valid_phone(raw_input)
+    print("---Phone number validator v2.0")
+    user_input = input("Enter a 10-digit phone number dashes/spaces allowed").strip()
+   
+    cleaned_number = sanitize_phone(user_input)
+
+    valid, message = is_valid_phone(cleaned_number)
 
 
     if valid:
-        print(f"ok  {message}")
+        formatted = format_phone(cleaned_number)
+        print(f" ok {message}")
+        print(f"standardized format : {formatted}")
+        
 
     else:
         print(f"invalid number : {message}")
